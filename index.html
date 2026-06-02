@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Distribuidora Doña Delia | Licorería & Mayorista</title>
+  <meta name="description" content="Distribuidora Doña Delia – Tu licorería mayorista de confianza. Cervezas, licores, sodas, hielo y bebidas al por mayor. Delivery disponible. Llámanos ya." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* ============================================================
+       VARIABLES & RESET
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red:       #c8102e;
+      --red-dark:  #8b0c20;
+      --red-light: #e8294a;
+      --gold:      #d4a017;
+      --gold-light:#f0c040;
+      --gold-dim:  rgba(212,160,23,.15);
+      --black:     #0a0a0a;
+      --dark:      #121212;
+      --dark2:     #1a1a1a;
+      --dark3:     #242424;
+      --dark4:     #2e2e2e;
+      --white:     #ffffff;
+      --gray:      #999;
+      --gray-light:#ccc;
+      --green-wa:  #25d366;
+      --green-dark:#128c4e;
+      --font-head: 'Playfair Display', serif;
+      --font-body: 'Outfit', sans-serif;
+      --radius-sm: 10px;
+      --radius:    16px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+      --shadow-red: 0 8px 32px rgba(200,16,46,.35);
+      --shadow-gold:0 8px 32px rgba(212,160,23,.25);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+      line-height: 1;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ============================================================
+       SCROLLBAR
+    ============================================================ */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--dark); }
+    ::-webkit-scrollbar-thumb { background: var(--red-dark); border-radius: 3px; }
+
+    /* ============================================================
+       AGE GATE
+    ============================================================ */
+    #age-gate {
+      position: fixed; inset: 0; z-index: 9999;
+      background: radial-gradient(ellipse at 50% 40%, #1c0008 0%, #050005 60%, #000 100%);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 20px; padding: 24px;
+      animation: ageFadeIn .4s ease;
+    }
+    @keyframes ageFadeIn { from{opacity:0} to{opacity:1} }
+    .ag-logo {
+      width: 130px; height: 130px; border-radius: 50%;
+      border: 3px solid var(--gold); overflow: hidden;
+      box-shadow: 0 0 50px rgba(212,160,23,.45), 0 0 100px rgba(200,16,46,.2);
+      animation: pulseLogo 2.5s ease-in-out infinite;
+    }
+    .ag-logo img { width:100%; height:100%; object-fit:cover; }
+    @keyframes pulseLogo {
+      0%,100%{ box-shadow:0 0 40px rgba(212,160,23,.4),0 0 80px rgba(200,16,46,.15); }
+      50%    { box-shadow:0 0 70px rgba(212,160,23,.7),0 0 140px rgba(200,16,46,.3); }
+    }
+    .ag-icon { font-size:2.8rem; color:var(--red-light); line-height:1; }
+    .ag-title {
+      font-family:var(--font-head); font-size:clamp(1.5rem,4vw,2.2rem);
+      color:var(--gold); text-align:center; line-height:1.2;
+    }
+    .ag-sub { color:var(--gray); text-align:center; font-size:.92rem; line-height:1.65; max-width:340px; }
+    .ag-divider { width:50px; height:2px; background:linear-gradient(90deg,var(--red),var(--gold)); border-radius:2px; }
+    .ag-buttons { display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin-top:4px; }
+    .ag-btn {
+      padding:13px 36px; border:none; border-radius:50px;
+      font-family:var(--font-body); font-size:.95rem; font-weight:700;
+      cursor:pointer; transition:all .3s; display:inline-flex; align-items:center; gap:8px;
+    }
+    .ag-yes {
+      background:linear-gradient(135deg,var(--red),var(--red-dark));
+      color:#fff; box-shadow:var(--shadow-red);
+    }
+    .ag-yes:hover { transform:translateY(-3px); box-shadow:0 12px 36px rgba(200,16,46,.55); }
+    .ag-no  { background:transparent; color:var(--gray); border:1.5px solid var(--dark4); }
+    .ag-no:hover { border-color:var(--gray); color:var(--white); }
+    .ag-legal { font-size:.72rem; color:#444; text-align:center; max-width:300px; line-height:1.5; }
+
+    /* ============================================================
+       MOBILE NAV OVERLAY
+    ============================================================ */
+    #mobile-nav {
+      display:none; position:fixed; inset:0; z-index:999;
+      background:rgba(10,10,10,.97); flex-direction:column;
+      align-items:center; justify-content:center; gap:28px;
+      padding:24px;
+    }
+    #mobile-nav.open { display:flex; }
+    #mobile-nav a {
+      font-family:var(--font-head); font-size:1.9rem; color:var(--white);
+      transition:color .25s; display:flex; align-items:center; gap:10px;
+    }
+    #mobile-nav a i { font-size:1.1rem; color:var(--gold); }
+    #mobile-nav a:hover { color:var(--gold); }
+    .mnav-close {
+      position:absolute; top:22px; right:26px;
+      font-size:1.3rem; cursor:pointer; color:var(--gray);
+      transition:color .2s;
+    }
+    .mnav-close:hover { color:var(--white); }
+    .mnav-wa {
+      margin-top:12px; padding:14px 36px;
+      background:linear-gradient(135deg,var(--green-wa),var(--green-dark));
+      border-radius:50px; font-weight:700; font-size:1rem;
+      display:inline-flex; align-items:center; gap:10px;
+    }
+
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+    #navbar {
+      position:fixed; top:0; left:0; right:0; z-index:900;
+      background:rgba(10,10,10,.88); backdrop-filter:blur(20px);
+      border-bottom:1px solid rgba(212,160,23,.15);
+      display:flex; align-items:center; justify-content:space-between;
+      padding:10px 5%; transition:all .35s;
+    }
+    #navbar.scrolled { padding:7px 5%; background:rgba(8,8,8,.97); }
+    .nav-brand { display:flex; align-items:center; gap:10px; }
+    .nav-brand-img {
+      width:48px; height:48px; border-radius:50%;
+      border:2px solid var(--gold); object-fit:cover;
+      transition:transform .35s;
+    }
+    .nav-brand-img:hover { transform:rotate(12deg) scale(1.08); }
+    .nav-brand-text { display:flex; flex-direction:column; line-height:1; }
+    .nav-brand-text .nbt-sup {
+      font-family:var(--font-head); font-size:.7rem; color:var(--gold);
+      letter-spacing:2.5px; text-transform:uppercase;
+    }
+    .nav-brand-text .nbt-name {
+      font-family:var(--font-head); font-size:1.05rem; font-weight:900;
+    }
+    .nav-links { display:flex; align-items:center; gap:24px; list-style:none; }
+    .nav-links a {
+      font-size:.88rem; font-weight:500; color:var(--gray);
+      position:relative; transition:color .25s; padding:4px 0;
+    }
+    .nav-links a::after {
+      content:''; position:absolute; bottom:0; left:0; right:0;
+      height:1.5px; background:var(--gold);
+      transform:scaleX(0); transition:transform .3s;
+    }
+    .nav-links a:hover { color:var(--white); }
+    .nav-links a:hover::after { transform:scaleX(1); }
+    .nav-actions { display:flex; align-items:center; gap:10px; }
+    .nav-call {
+      display:flex; align-items:center; gap:6px;
+      font-size:.82rem; font-weight:600; color:var(--gold);
+    }
+    .nav-call i { font-size:.9rem; }
+    .nav-wa {
+      padding:9px 20px;
+      background:linear-gradient(135deg,var(--red),var(--red-dark));
+      color:#fff; border-radius:50px; font-weight:700; font-size:.82rem;
+      box-shadow:var(--shadow-red); transition:all .3s;
+      display:inline-flex; align-items:center; gap:7px;
+    }
+    .nav-wa:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(200,16,46,.55); }
+    .hamburger {
+      display:none; flex-direction:column; gap:5px;
+      cursor:pointer; padding:5px;
+    }
+    .hamburger span {
+      display:block; width:24px; height:2px;
+      background:var(--white); border-radius:2px; transition:all .3s;
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    #hero {
+      min-height:100vh;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,.65) 0%, rgba(10,10,10,1) 100%),
+        url('products_hero.png') center/cover no-repeat;
+      display:flex; align-items:center; justify-content:center;
+      flex-direction:column; text-align:center;
+      padding:130px 5% 90px;
+      position:relative; overflow:hidden;
+    }
+    #hero::before {
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background:
+        radial-gradient(ellipse at 25% 60%, rgba(200,16,46,.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 40%, rgba(212,160,23,.1)  0%, transparent 55%);
+    }
+    /* floating particles */
+    .particle {
+      position:absolute; border-radius:50%; pointer-events:none;
+      animation:float-up linear infinite;
+      opacity:.35;
+    }
+    @keyframes float-up {
+      0%   { transform:translateY(0) scale(1);   opacity:.35; }
+      100% { transform:translateY(-120vh) scale(0); opacity:0; }
+    }
+    .hero-badge {
+      display:inline-flex; align-items:center; gap:8px;
+      background:rgba(212,160,23,.12); border:1px solid rgba(212,160,23,.4);
+      padding:6px 20px; border-radius:50px;
+      font-size:.78rem; font-weight:700; color:var(--gold);
+      letter-spacing:2.5px; text-transform:uppercase;
+      margin-bottom:22px;
+      animation:fadeUp .7s ease both;
+    }
+    .hero-logo {
+      width:170px; height:170px; border-radius:50%; overflow:hidden;
+      border:4px solid var(--gold);
+      box-shadow:0 0 60px rgba(212,160,23,.55),0 0 120px rgba(200,16,46,.2);
+      margin-bottom:28px;
+      animation:scaleIn .8s ease .1s both;
+    }
+    .hero-logo img { width:100%; height:100%; object-fit:cover; }
+    #hero h1 {
+      font-family:var(--font-head); font-size:clamp(2.2rem,6vw,5rem);
+      line-height:1.08; animation:fadeUp .8s ease .15s both;
+    }
+    #hero h1 em { color:var(--gold); font-style:italic; }
+    .hero-tagline {
+      margin:16px auto 0; max-width:540px;
+      color:var(--gray-light); font-size:clamp(.9rem,2vw,1.1rem);
+      line-height:1.75; font-weight:300;
+      animation:fadeUp .8s ease .25s both;
+    }
+    .hero-actions {
+      display:flex; gap:14px; flex-wrap:wrap; justify-content:center;
+      margin-top:36px; animation:fadeUp .8s ease .35s both;
+    }
+    .btn-red {
+      padding:15px 34px; border-radius:50px; border:none; cursor:pointer;
+      background:linear-gradient(135deg,var(--red),var(--red-dark));
+      color:#fff; font-family:var(--font-body); font-size:.95rem; font-weight:700;
+      box-shadow:var(--shadow-red); transition:all .3s;
+      display:inline-flex; align-items:center; gap:9px;
+    }
+    .btn-red:hover { transform:translateY(-3px); box-shadow:0 12px 36px rgba(200,16,46,.6); }
+    .btn-outline-gold {
+      padding:15px 34px; border-radius:50px;
+      background:transparent; color:var(--gold); border:2px solid var(--gold);
+      font-family:var(--font-body); font-size:.95rem; font-weight:700;
+      cursor:pointer; transition:all .3s;
+      display:inline-flex; align-items:center; gap:9px;
+    }
+    .btn-outline-gold:hover { background:var(--gold); color:var(--black); transform:translateY(-3px); }
+    .hero-stats {
+      display:flex; gap:36px; flex-wrap:wrap; justify-content:center;
+      margin-top:56px; animation:fadeUp .8s ease .45s both;
+      padding:24px 32px;
+      background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07);
+      border-radius:var(--radius-xl); backdrop-filter:blur(10px);
+    }
+    .stat { text-align:center; }
+    .stat-n { font-family:var(--font-head); font-size:2rem; color:var(--gold); line-height:1; }
+    .stat-l { font-size:.75rem; color:var(--gray); text-transform:uppercase; letter-spacing:1.5px; margin-top:4px; }
+    .stat-sep { width:1px; background:rgba(255,255,255,.1); align-self:stretch; }
+    .hero-scroll {
+      position:absolute; bottom:28px; left:50%;
+      transform:translateX(-50%);
+      display:flex; flex-direction:column; align-items:center; gap:5px;
+      color:var(--gray); font-size:.72rem; letter-spacing:1.5px;
+      animation:bounce 2s ease infinite;
+    }
+    @keyframes bounce {
+      0%,100%{ transform:translateX(-50%) translateY(0); }
+      50%    { transform:translateX(-50%) translateY(8px); }
+    }
+
+    /* ============================================================
+       MARQUEE
+    ============================================================ */
+    .marquee-bar {
+      background:linear-gradient(90deg,var(--red-dark) 0%,var(--red) 50%,var(--red-dark) 100%);
+      padding:13px 0; overflow:hidden;
+      border-top:1px solid rgba(255,255,255,.08);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .marquee-inner {
+      display:flex; gap:52px; width:max-content;
+      animation:scrollMarquee 28s linear infinite;
+    }
+    .marquee-inner span {
+      white-space:nowrap; font-size:.82rem; font-weight:700;
+      letter-spacing:1px; display:flex; align-items:center; gap:10px;
+    }
+    .marquee-inner span i { color:var(--gold-light); }
+    @keyframes scrollMarquee {
+      from{ transform:translateX(0); }
+      to  { transform:translateX(-50%); }
+    }
+
+    /* ============================================================
+       SECTION SHARED
+    ============================================================ */
+    .section-pad { padding:96px 5%; }
+    .section-pad-sm { padding:64px 5%; }
+    .bg-dark  { background:var(--dark); }
+    .bg-black { background:var(--black); }
+    .bg-dark2 { background:var(--dark2); }
+    .sec-head { text-align:center; margin-bottom:56px; }
+    .sec-tag {
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:.73rem; font-weight:700; letter-spacing:3px;
+      text-transform:uppercase; color:var(--gold); margin-bottom:10px;
+    }
+    .sec-head h2 { font-family:var(--font-head); font-size:clamp(1.9rem,4vw,3rem); line-height:1.1; }
+    .sec-head h2 em { color:var(--red-light); font-style:normal; }
+    .sec-head p { color:var(--gray); margin-top:10px; font-size:.95rem; line-height:1.7; }
+    .rule { width:52px; height:3px; background:linear-gradient(90deg,var(--red),var(--gold)); border-radius:2px; margin:14px auto 0; }
+
+    /* ============================================================
+       PROMO BANNER
+    ============================================================ */
+    #promo {
+      position:relative; overflow:hidden;
+      min-height:320px;
+      background:url('promo_banner.png') center/cover no-repeat;
+      display:flex; align-items:center;
+    }
+    #promo::before {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(90deg, rgba(0,0,0,.85) 0%, rgba(0,0,0,.5) 60%, rgba(0,0,0,.2) 100%);
+    }
+    .promo-content {
+      position:relative; z-index:1; padding:60px 5%;
+      max-width:700px;
+    }
+    .promo-tag {
+      display:inline-flex; align-items:center; gap:7px;
+      background:var(--red); color:#fff;
+      padding:5px 16px; border-radius:50px;
+      font-size:.75rem; font-weight:800; letter-spacing:2px; text-transform:uppercase;
+      margin-bottom:18px;
+      animation:tagPulse 1.8s ease-in-out infinite;
+    }
+    @keyframes tagPulse {
+      0%,100%{ box-shadow:0 0 0 0 rgba(200,16,46,.5); }
+      50%    { box-shadow:0 0 0 8px rgba(200,16,46,0); }
+    }
+    .promo-content h2 {
+      font-family:var(--font-head); font-size:clamp(1.8rem,4vw,3.2rem);
+      line-height:1.15; margin-bottom:14px;
+    }
+    .promo-content h2 span { color:var(--gold); }
+    .promo-content p { color:var(--gray-light); font-size:.95rem; line-height:1.75; margin-bottom:28px; }
+    .promo-items {
+      display:flex; flex-wrap:wrap; gap:10px; margin-bottom:28px;
+    }
+    .promo-chip {
+      padding:7px 16px; background:rgba(212,160,23,.15);
+      border:1px solid rgba(212,160,23,.35); border-radius:50px;
+      font-size:.82rem; font-weight:600; color:var(--gold);
+    }
+
+    /* ============================================================
+       PRODUCTS GRID
+    ============================================================ */
+    .products-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(285px,1fr));
+      gap:24px;
+    }
+    .pcard {
+      background:var(--dark2); border-radius:var(--radius-lg); overflow:hidden;
+      border:1px solid rgba(255,255,255,.05);
+      transition:all .35s; position:relative;
+    }
+    .pcard:hover {
+      transform:translateY(-8px);
+      border-color:rgba(212,160,23,.3);
+      box-shadow:0 24px 60px rgba(0,0,0,.55);
+    }
+    .pcard-img { height:215px; overflow:hidden; position:relative; }
+    .pcard-img img { width:100%; height:100%; object-fit:cover; transition:transform .6s; }
+    .pcard:hover .pcard-img img { transform:scale(1.1); }
+    .pcard-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(to top,rgba(0,0,0,.8) 0%,transparent 55%);
+    }
+    .pcard-badge {
+      position:absolute; top:13px; right:13px;
+      background:linear-gradient(135deg,var(--red),var(--red-dark));
+      color:#fff; font-size:.7rem; font-weight:800;
+      padding:4px 12px; border-radius:50px; letter-spacing:.5px;
+      text-transform:uppercase;
+    }
+    .pcard-body { padding:20px 22px 24px; }
+    .pcard-emoji { font-size:1.5rem; margin-bottom:7px; line-height:1; }
+    .pcard-body h3 {
+      font-family:var(--font-head); font-size:1.25rem;
+      color:var(--white); margin-bottom:7px;
+    }
+    .pcard-body p { color:var(--gray); font-size:.87rem; line-height:1.65; }
+    .pcard-tags { display:flex; flex-wrap:wrap; gap:5px; margin-top:14px; }
+    .ptag {
+      font-size:.7rem; padding:3px 10px;
+      background:var(--gold-dim); border:1px solid rgba(212,160,23,.25);
+      color:var(--gold); border-radius:50px;
+    }
+    .pcard-btn {
+      display:flex; align-items:center; justify-content:center; gap:7px;
+      margin:18px 22px 0;
+      padding:12px; border-radius:var(--radius-sm);
+      background:rgba(200,16,46,.08); border:1px solid rgba(200,16,46,.2);
+      color:var(--red-light); font-weight:600; font-size:.85rem;
+      cursor:pointer; transition:all .3s;
+    }
+    .pcard-btn:hover { background:var(--red); color:#fff; border-color:var(--red); }
+
+    /* ============================================================
+       MAYOREO
+    ============================================================ */
+    #mayoreo {
+      padding:96px 5%; position:relative; overflow:hidden;
+      background:linear-gradient(135deg,#0e0005 0%,var(--dark) 100%);
+    }
+    #mayoreo::after {
+      content:''; position:absolute; top:-80px; right:-80px;
+      width:460px; height:460px; border-radius:50%; pointer-events:none;
+      background:radial-gradient(circle,rgba(200,16,46,.1),transparent 70%);
+    }
+    .mayoreo-grid { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+    .mayoreo-text .sec-tag { justify-content:flex-start; }
+    .mayoreo-text h2 {
+      font-family:var(--font-head); font-size:clamp(1.9rem,4vw,3rem);
+      line-height:1.12; margin-bottom:16px;
+    }
+    .mayoreo-text h2 em { color:var(--gold); font-style:normal; }
+    .mayoreo-text p { color:var(--gray); line-height:1.8; margin-bottom:24px; font-size:.95rem; }
+    .mayoreo-list { list-style:none; display:flex; flex-direction:column; gap:12px; margin-bottom:32px; }
+    .mayoreo-list li {
+      display:flex; align-items:center; gap:12px;
+      font-size:.93rem; color:var(--gray-light);
+    }
+    .mayoreo-list li i { color:var(--gold); width:16px; }
+    .mayoreo-card {
+      background:var(--dark2); border-radius:var(--radius-lg); padding:36px;
+      border:1px solid rgba(212,160,23,.18);
+      box-shadow:0 20px 60px rgba(0,0,0,.45);
+      position:relative; z-index:1;
+    }
+    .mayoreo-card h3 {
+      font-family:var(--font-head); font-size:1.25rem; color:var(--gold);
+      margin-bottom:22px; text-align:center;
+      display:flex; align-items:center; justify-content:center; gap:9px;
+    }
+    .cat-table { width:100%; border-collapse:collapse; }
+    .cat-table th {
+      padding:9px 14px; text-align:left;
+      font-size:.75rem; text-transform:uppercase; letter-spacing:1.5px;
+      color:var(--gray); border-bottom:1px solid rgba(255,255,255,.07);
+    }
+    .cat-table td { padding:13px 14px; font-size:.88rem; border-bottom:1px solid rgba(255,255,255,.04); }
+    .cat-table tr:last-child td { border-bottom:none; }
+    .cat-avail { color:#4ade80; font-weight:600; }
+    .mayoreo-note {
+      margin-top:18px; padding:14px 16px;
+      background:rgba(212,160,23,.07); border:1px solid rgba(212,160,23,.18);
+      border-radius:var(--radius-sm); font-size:.82rem; color:var(--gray);
+      text-align:center; line-height:1.6;
+    }
+    .mayoreo-note i { color:var(--gold); }
+
+    /* ============================================================
+       FEATURES / WHY US
+    ============================================================ */
+    .feat-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:20px; }
+    .feat-card {
+      background:linear-gradient(135deg,var(--dark2),var(--dark3));
+      border:1px solid rgba(255,255,255,.05);
+      border-radius:var(--radius-lg); padding:30px 24px; text-align:center;
+      transition:all .3s;
+    }
+    .feat-card:hover {
+      border-color:rgba(200,16,46,.35);
+      box-shadow:0 14px 44px rgba(200,16,46,.12);
+      transform:translateY(-5px);
+    }
+    .feat-icon {
+      width:64px; height:64px;
+      background:linear-gradient(135deg,rgba(200,16,46,.18),rgba(212,160,23,.12));
+      border:1px solid rgba(212,160,23,.25); border-radius:16px;
+      display:flex; align-items:center; justify-content:center;
+      margin:0 auto 16px; font-size:1.5rem; transition:all .3s;
+    }
+    .feat-card:hover .feat-icon {
+      background:linear-gradient(135deg,var(--red),var(--red-dark));
+      border-color:var(--red);
+    }
+    .feat-card h3 { font-size:1.05rem; margin-bottom:7px; }
+    .feat-card p { font-size:.86rem; color:var(--gray); line-height:1.65; }
+
+    /* ============================================================
+       CONTACT SECTION
+    ============================================================ */
+    #contacto { padding:96px 5%; background:var(--dark); }
+    .contact-wrap { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start; }
+    .contact-left h2 {
+      font-family:var(--font-head); font-size:clamp(1.7rem,3vw,2.5rem);
+      line-height:1.15; margin-bottom:14px;
+    }
+    .contact-left h2 em { color:var(--gold); font-style:normal; }
+    .contact-left > p { color:var(--gray); line-height:1.8; margin-bottom:32px; font-size:.93rem; }
+    .cinfo-list { display:flex; flex-direction:column; gap:18px; }
+    .cinfo-item { display:flex; align-items:flex-start; gap:16px; }
+    .cinfo-icon {
+      width:50px; height:50px; flex-shrink:0;
+      background:linear-gradient(135deg,var(--red),var(--red-dark));
+      border-radius:14px; display:flex; align-items:center; justify-content:center;
+      font-size:1rem; box-shadow:var(--shadow-red);
+    }
+    .cinfo-text strong { display:block; font-size:.95rem; margin-bottom:3px; }
+    .cinfo-text span, .cinfo-text a { color:var(--gray); font-size:.87rem; line-height:1.6; }
+    .cinfo-text a:hover { color:var(--gold); }
+    .wa-cta {
+      display:inline-flex; align-items:center; gap:12px; margin-top:26px;
+      background:linear-gradient(135deg,var(--green-wa),var(--green-dark));
+      color:#fff; padding:16px 32px; border-radius:50px;
+      font-weight:700; font-size:1rem;
+      box-shadow:0 6px 24px rgba(37,211,102,.35);
+      transition:all .3s;
+    }
+    .wa-cta:hover { transform:translateY(-3px); box-shadow:0 10px 32px rgba(37,211,102,.5); }
+    .wa-cta i { font-size:1.35rem; }
+
+    /* FORM */
+    .form-box {
+      background:var(--dark2); border-radius:var(--radius-xl); padding:38px;
+      border:1px solid rgba(255,255,255,.06);
+    }
+    .form-box h3 { font-family:var(--font-head); font-size:1.45rem; margin-bottom:6px; }
+    .form-box > p { color:var(--gray); font-size:.88rem; line-height:1.6; margin-bottom:26px; }
+    .fg { margin-bottom:16px; }
+    .fg label {
+      display:block; font-size:.8rem; font-weight:600;
+      color:var(--gray); margin-bottom:7px; letter-spacing:.3px;
+    }
+    .fg input, .fg select, .fg textarea {
+      width:100%; padding:13px 16px;
+      background:var(--dark3); color:var(--white);
+      border:1px solid rgba(255,255,255,.08); border-radius:var(--radius-sm);
+      font-family:var(--font-body); font-size:.92rem;
+      transition:border-color .3s, box-shadow .3s;
+      outline:none; resize:none;
+    }
+    .fg input:focus, .fg textarea:focus {
+      border-color:var(--gold);
+      box-shadow:0 0 0 3px rgba(212,160,23,.1);
+    }
+    .fg select { appearance:none; cursor:pointer; }
+    .fg textarea { height:110px; }
+    .fg-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .form-submit {
+      width:100%; padding:15px;
+      background:linear-gradient(135deg,var(--red),var(--red-dark));
+      color:#fff; border:none; border-radius:var(--radius-sm);
+      font-family:var(--font-body); font-size:.95rem; font-weight:700;
+      cursor:pointer; transition:all .3s;
+      display:flex; align-items:center; justify-content:center; gap:9px;
+      box-shadow:var(--shadow-red);
+    }
+    .form-submit:hover { transform:translateY(-2px); box-shadow:0 10px 32px rgba(200,16,46,.55); }
+    .form-success { display:none; text-align:center; padding:30px 16px; }
+    .form-success .fs-icon { font-size:3rem; color:var(--green-wa); margin-bottom:14px; display:block; }
+    .form-success h4 { font-family:var(--font-head); font-size:1.25rem; margin-bottom:8px; }
+    .form-success p { color:var(--gray); font-size:.88rem; line-height:1.6; }
+
+    /* ============================================================
+       WHATSAPP CHAT BUBBLE (floating)
+    ============================================================ */
+    #wa-bubble {
+      position:fixed; bottom:24px; right:24px; z-index:800;
+      display:flex; flex-direction:column; align-items:flex-end; gap:12px;
+    }
+    .wa-chat-box {
+      background:var(--dark2); border:1px solid rgba(255,255,255,.1);
+      border-radius:var(--radius-lg); padding:18px;
+      width:290px; box-shadow:0 12px 40px rgba(0,0,0,.6);
+      animation:slideUpBox .4s ease;
+      display:none;
+    }
+    .wa-chat-box.open { display:block; }
+    @keyframes slideUpBox {
+      from{ opacity:0; transform:translateY(16px); }
+      to  { opacity:1; transform:translateY(0); }
+    }
+    .wcb-header {
+      display:flex; align-items:center; gap:10px; margin-bottom:14px;
+      padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,.07);
+    }
+    .wcb-avatar {
+      width:40px; height:40px; border-radius:50%; overflow:hidden;
+      border:2px solid var(--green-wa);
+    }
+    .wcb-avatar img { width:100%; height:100%; object-fit:cover; }
+    .wcb-info strong { display:block; font-size:.88rem; }
+    .wcb-info span { font-size:.75rem; color:var(--green-wa); }
+    .wcb-close {
+      margin-left:auto; color:var(--gray); cursor:pointer; font-size:1rem;
+      transition:color .2s; line-height:1;
+    }
+    .wcb-close:hover { color:var(--white); }
+    .wcb-msg {
+      background:var(--dark3); border-radius:var(--radius-sm);
+      padding:12px 14px; font-size:.85rem; color:var(--gray-light);
+      line-height:1.6; margin-bottom:14px;
+    }
+    .wcb-msg strong { color:var(--white); }
+    .wcb-start {
+      display:flex; align-items:center; justify-content:center; gap:8px;
+      width:100%; padding:13px;
+      background:linear-gradient(135deg,var(--green-wa),var(--green-dark));
+      color:#fff; border:none; border-radius:var(--radius-sm);
+      font-family:var(--font-body); font-size:.9rem; font-weight:700;
+      cursor:pointer; transition:all .3s;
+    }
+    .wcb-start:hover { opacity:.9; }
+    .wa-fab {
+      width:56px; height:56px; border-radius:50%;
+      background:linear-gradient(135deg,var(--green-wa),var(--green-dark));
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.5rem; color:#fff; cursor:pointer;
+      box-shadow:0 6px 24px rgba(37,211,102,.5);
+      animation:waPulse 2s infinite;
+      transition:transform .3s;
+      border:none;
+    }
+    .wa-fab:hover { transform:scale(1.1); }
+    @keyframes waPulse {
+      0%,100%{ box-shadow:0 4px 20px rgba(37,211,102,.45); }
+      50%    { box-shadow:0 4px 40px rgba(37,211,102,.75),0 0 0 10px rgba(37,211,102,.1); }
+    }
+    .wa-notif {
+      position:absolute; top:-4px; right:-4px;
+      width:18px; height:18px; border-radius:50%;
+      background:var(--red); color:#fff;
+      font-size:.65rem; font-weight:800;
+      display:flex; align-items:center; justify-content:center;
+      border:2px solid var(--black);
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background:#060606;
+      border-top:1px solid rgba(212,160,23,.12);
+      padding:60px 5% 28px;
+    }
+    .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr; gap:44px; margin-bottom:44px; }
+    .fb-logo {
+      width:65px; height:65px; border-radius:50%;
+      border:2px solid var(--gold); object-fit:cover; margin-bottom:14px;
+    }
+    .fb-desc { color:var(--gray); font-size:.88rem; line-height:1.75; max-width:280px; }
+    .fb-socials { display:flex; gap:10px; margin-top:18px; }
+    .fb-socials a {
+      width:38px; height:38px;
+      background:var(--dark2); border:1px solid rgba(255,255,255,.07);
+      border-radius:10px; display:flex; align-items:center; justify-content:center;
+      font-size:.88rem; color:var(--gray); transition:all .3s;
+    }
+    .fb-socials a:hover { background:var(--red); color:#fff; border-color:var(--red); }
+    .fc h4 {
+      font-size:.8rem; font-weight:800; text-transform:uppercase;
+      letter-spacing:2.5px; color:var(--gold); margin-bottom:18px;
+    }
+    .fc ul { list-style:none; display:flex; flex-direction:column; gap:9px; }
+    .fc ul li a { color:var(--gray); font-size:.86rem; transition:color .25s; display:flex; align-items:center; gap:7px; }
+    .fc ul li a:hover { color:var(--white); }
+    .footer-bottom {
+      display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+      padding-top:24px; border-top:1px solid rgba(255,255,255,.05);
+    }
+    .footer-bottom p { color:#3a3a3a; font-size:.78rem; }
+    .age-chip {
+      display:flex; align-items:center; gap:6px;
+      background:rgba(200,16,46,.08); border:1px solid rgba(200,16,46,.25);
+      padding:5px 14px; border-radius:50px;
+      font-size:.75rem; font-weight:700; color:var(--red-light);
+    }
+
+    /* ============================================================
+       ANIMATIONS UTILITY
+    ============================================================ */
+    @keyframes fadeUp {
+      from{ opacity:0; transform:translateY(28px); }
+      to  { opacity:1; transform:translateY(0); }
+    }
+    @keyframes scaleIn {
+      from{ opacity:0; transform:scale(.82); }
+      to  { opacity:1; transform:scale(1); }
+    }
+    .reveal { opacity:0; transform:translateY(32px); transition:opacity .75s ease, transform .75s ease; }
+    .reveal.vis { opacity:1; transform:none; }
+    .reveal-d1 { transition-delay:.1s; }
+    .reveal-d2 { transition-delay:.2s; }
+    .reveal-d3 { transition-delay:.3s; }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media(max-width:960px){
+      .mayoreo-grid  { grid-template-columns:1fr; }
+      .contact-wrap  { grid-template-columns:1fr; }
+      .footer-grid   { grid-template-columns:1fr 1fr; }
+      .nav-links     { display:none; }
+      .nav-call      { display:none; }
+      .hamburger     { display:flex; }
+    }
+    @media(max-width:600px){
+      .footer-grid { grid-template-columns:1fr; }
+      .fg-row      { grid-template-columns:1fr; }
+      .hero-stats  { gap:20px; padding:18px 20px; }
+      .stat-sep    { display:none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ==================== AGE GATE ==================== -->
+<div id="age-gate">
+  <div class="ag-logo">
+    <img src="logo.png" alt="Logo"
+         onerror="this.parentElement.innerHTML='<span style=font-size:4rem;line-height:1>🍺</span>'" />
+  </div>
+  <div class="ag-icon"><i class="fas fa-shield-halved"></i></div>
+  <h2 class="ag-title">Verificación de Edad</h2>
+  <div class="ag-divider"></div>
+  <p class="ag-sub">El contenido de este sitio está destinado exclusivamente a personas mayores de <strong>18 años</strong>. ¿Confirmas ser mayor de edad?</p>
+  <div class="ag-buttons">
+    <button class="ag-btn ag-yes" id="age-yes">
+      <i class="fas fa-check-circle"></i> Sí, tengo 18+
+    </button>
+    <button class="ag-btn ag-no" id="age-no">
+      <i class="fas fa-times"></i> No, salir
+    </button>
+  </div>
+  <p class="ag-legal">Al continuar, confirmas que eres mayor de edad y aceptas que el consumo responsable de alcohol es tu responsabilidad.</p>
+</div>
+
+<!-- ==================== MOBILE NAV ==================== -->
+<div id="mobile-nav">
+  <i class="fas fa-times mnav-close" id="mnav-close"></i>
+  <a href="#hero"      onclick="closeMobileNav()"><i class="fas fa-home"></i> Inicio</a>
+  <a href="#promo"     onclick="closeMobileNav()"><i class="fas fa-tag"></i> Ofertas</a>
+  <a href="#productos" onclick="closeMobileNav()"><i class="fas fa-boxes-stacked"></i> Productos</a>
+  <a href="#mayoreo"   onclick="closeMobileNav()"><i class="fas fa-truck"></i> Mayoreo</a>
+  <a href="#contacto"  onclick="closeMobileNav()"><i class="fas fa-envelope"></i> Contacto</a>
+  <a href="https://wa.me/59170000000" target="_blank" class="mnav-wa" onclick="closeMobileNav()">
+    <i class="fab fa-whatsapp"></i> WhatsApp
+  </a>
+</div>
+
+<!-- ==================== NAVBAR ==================== -->
+<nav id="navbar">
+  <div class="nav-brand">
+    <img class="nav-brand-img" src="logo.png" alt="Logo"
+         onerror="this.style.display='none'" />
+    <div class="nav-brand-text">
+      <span class="nbt-sup">Distribuidora</span>
+      <span class="nbt-name">Doña Delia</span>
+    </div>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="#hero">Inicio</a></li>
+    <li><a href="#promo">Ofertas</a></li>
+    <li><a href="#productos">Productos</a></li>
+    <li><a href="#mayoreo">Mayoreo</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+
+  <div class="nav-actions">
+    <a href="tel:+59170000000" class="nav-call">
+      <i class="fas fa-phone-flip"></i> +591 700-00000
+    </a>
+    <a href="https://wa.me/59170000000" target="_blank" class="nav-wa">
+      <i class="fab fa-whatsapp"></i> Pedir Ahora
+    </a>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section id="hero">
+  <!-- Particles -->
+  <div class="particle" style="left:10%;width:4px;height:4px;background:var(--gold);animation-duration:12s;animation-delay:0s;bottom:-5%"></div>
+  <div class="particle" style="left:25%;width:3px;height:3px;background:var(--red);animation-duration:15s;animation-delay:3s;bottom:-5%"></div>
+  <div class="particle" style="left:60%;width:5px;height:5px;background:var(--gold);animation-duration:10s;animation-delay:7s;bottom:-5%"></div>
+  <div class="particle" style="left:80%;width:3px;height:3px;background:var(--red-light);animation-duration:13s;animation-delay:2s;bottom:-5%"></div>
+  <div class="particle" style="left:45%;width:4px;height:4px;background:var(--gold-light);animation-duration:18s;animation-delay:5s;bottom:-5%"></div>
+
+  <div class="hero-badge"><i class="fas fa-crown"></i> Distribución Mayorista Oficial</div>
+
+  <div class="hero-logo">
+    <img src="logo.png" alt="Distribuidora Doña Delia"
+         onerror="this.parentElement.innerHTML='<span style=font-size:6rem;line-height:1>🍺</span>'" />
+  </div>
+
+  <h1>Distribuidora<br /><em>Doña Delia</em></h1>
+  <p class="hero-tagline">
+    Tu licorería mayorista de confianza en Bolivia. Cervezas, licores premium,
+    sodas, hielo y mucho más — todo al por mayor, con la mejor atención.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#productos" class="btn-red">
+      <i class="fas fa-shopping-basket"></i> Ver Productos
+    </a>
+    <a href="#contacto" class="btn-outline-gold">
+      <i class="fab fa-whatsapp"></i> Contactar
+    </a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-n">+500</div>
+      <div class="stat-l">Clientes</div>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat">
+      <div class="stat-n">+100</div>
+      <div class="stat-l">Productos</div>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat">
+      <div class="stat-n">24h</div>
+      <div class="stat-l">Atención</div>
+    </div>
+    <div class="stat-sep"></div>
+    <div class="stat">
+      <div class="stat-n">+10</div>
+      <div class="stat-l">Años</div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>EXPLORAR</span>
+    <i class="fas fa-chevron-down"></i>
+  </div>
+</section>
+
+<!-- ==================== MARQUEE ==================== -->
+<div class="marquee-bar">
+  <div class="marquee-inner">
+    <span><i class="fas fa-beer-mug-empty"></i> CERVEZAS AL POR MAYOR</span>
+    <span><i class="fas fa-wine-bottle"></i> LICORES PREMIUM</span>
+    <span><i class="fas fa-glass-water"></i> SODAS Y BEBIDAS</span>
+    <span><i class="fas fa-snowflake"></i> HIELO EN BOLSA</span>
+    <span><i class="fas fa-truck-fast"></i> DELIVERY DISPONIBLE</span>
+    <span><i class="fas fa-phone-flip"></i> +591 700-00000</span>
+    <span><i class="fab fa-whatsapp"></i> PEDIDOS POR WHATSAPP</span>
+    <span><i class="fas fa-star"></i> DISTRIBUCIÓN MAYORISTA</span>
+    <!-- Duplicate -->
+    <span><i class="fas fa-beer-mug-empty"></i> CERVEZAS AL POR MAYOR</span>
+    <span><i class="fas fa-wine-bottle"></i> LICORES PREMIUM</span>
+    <span><i class="fas fa-glass-water"></i> SODAS Y BEBIDAS</span>
+    <span><i class="fas fa-snowflake"></i> HIELO EN BOLSA</span>
+    <span><i class="fas fa-truck-fast"></i> DELIVERY DISPONIBLE</span>
+    <span><i class="fas fa-phone-flip"></i> +591 700-00000</span>
+    <span><i class="fab fa-whatsapp"></i> PEDIDOS POR WHATSAPP</span>
+    <span><i class="fas fa-star"></i> DISTRIBUCIÓN MAYORISTA</span>
+  </div>
+</div>
+
+<!-- ==================== PROMO ==================== -->
+<section id="promo">
+  <div class="promo-content reveal">
+    <div class="promo-tag"><i class="fas fa-bolt"></i> Oferta Especial</div>
+    <h2>Todo al <span>Por Mayor</span>,<br />Sin Límite de Cantidad</h2>
+    <p>
+      Abastece tu negocio, local o evento con los mejores productos al mejor precio.
+      Trabajamos con tiendas, licorerías, restaurantes, discotecas y más.
+    </p>
+    <div class="promo-items">
+      <span class="promo-chip">🍺 Cervezas</span>
+      <span class="promo-chip">🥃 Licores</span>
+      <span class="promo-chip">🥤 Sodas</span>
+      <span class="promo-chip">❄️ Hielo</span>
+      <span class="promo-chip">🍷 Vinos</span>
+      <span class="promo-chip">⚡ Energizantes</span>
+    </div>
+    <a href="https://wa.me/59170000000?text=Hola%20Distribuidora%20Do%C3%B1a%20Delia%2C%20quiero%20consultar%20precios%20mayoristas" target="_blank" class="btn-red" style="display:inline-flex;">
+      <i class="fab fa-whatsapp"></i> Consultar Precios
+    </a>
+  </div>
+</section>
+
+<!-- ==================== PRODUCTOS ==================== -->
+<section id="productos" class="section-pad bg-dark">
+  <div class="sec-head reveal">
+    <div class="sec-tag"><i class="fas fa-boxes-stacked"></i> Catálogo Completo</div>
+    <h2>Nuestros <em>Productos</em></h2>
+    <p>Todo lo que necesitas en un solo lugar, disponible al por mayor y al detalle</p>
+    <div class="rule"></div>
+  </div>
+  <div class="products-grid">
+
+    <div class="pcard reveal reveal-d1">
+      <div class="pcard-img">
+        <img src="beer_category.png" alt="Cervezas" />
+        <div class="pcard-overlay"></div>
+        <div class="pcard-badge">⭐ Más Pedido</div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-emoji">🍺</div>
+        <h3>Cervezas</h3>
+        <p>Amplia variedad de cervezas nacionales e importadas al por mayor. ¡Siempre frías y disponibles!</p>
+        <div class="pcard-tags">
+          <span class="ptag">Paceña</span>
+          <span class="ptag">Huari</span>
+          <span class="ptag">Corona</span>
+          <span class="ptag">Ducal</span>
+          <span class="ptag">Sureña</span>
+        </div>
+      </div>
+      <a href="https://wa.me/59170000000?text=Hola!%20Quiero%20cervezas%20al%20por%20mayor" target="_blank" class="pcard-btn">
+        <i class="fab fa-whatsapp"></i> Pedir este producto
+      </a>
+    </div>
+
+    <div class="pcard reveal reveal-d2">
+      <div class="pcard-img">
+        <img src="liquor_category.png" alt="Licores" />
+        <div class="pcard-overlay"></div>
+        <div class="pcard-badge">🥃 Premium</div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-emoji">🥃</div>
+        <h3>Licores & Spirits</h3>
+        <p>Whisky, ron, vodka, singani, vinos y marcas premium nacionales e internacionales.</p>
+        <div class="pcard-tags">
+          <span class="ptag">Whisky Red Label</span>
+          <span class="ptag">Ron</span>
+          <span class="ptag">Singani</span>
+          <span class="ptag">Vodka</span>
+        </div>
+      </div>
+      <a href="https://wa.me/59170000000?text=Hola!%20Quiero%20licores%20al%20por%20mayor" target="_blank" class="pcard-btn">
+        <i class="fab fa-whatsapp"></i> Pedir este producto
+      </a>
+    </div>
+
+    <div class="pcard reveal reveal-d3">
+      <div class="pcard-img">
+        <img src="sodas_category.png" alt="Sodas y Bebidas" />
+        <div class="pcard-overlay"></div>
+        <div class="pcard-badge">🥤 Refrescante</div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-emoji">🥤</div>
+        <h3>Sodas & Bebidas</h3>
+        <p>Gaseosas, jugos, energizantes y bebidas sin alcohol para todas las ocasiones y edades.</p>
+        <div class="pcard-tags">
+          <span class="ptag">Coca-Cola</span>
+          <span class="ptag">Sprite</span>
+          <span class="ptag">Fanta</span>
+          <span class="ptag">Agua</span>
+          <span class="ptag">Energizantes</span>
+        </div>
+      </div>
+      <a href="https://wa.me/59170000000?text=Hola!%20Quiero%20sodas%20y%20bebidas%20al%20por%20mayor" target="_blank" class="pcard-btn">
+        <i class="fab fa-whatsapp"></i> Pedir este producto
+      </a>
+    </div>
+
+    <div class="pcard reveal reveal-d1">
+      <div class="pcard-img">
+        <img src="ice_category.png" alt="Hielo" />
+        <div class="pcard-overlay"></div>
+        <div class="pcard-badge">❄️ Siempre Frío</div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-emoji">❄️</div>
+        <h3>Hielo</h3>
+        <p>Hielo en bolsa para eventos, fiestas y negocios. Diferentes presentaciones disponibles al por mayor.</p>
+        <div class="pcard-tags">
+          <span class="ptag">Bolsa 2kg</span>
+          <span class="ptag">Bolsa 5kg</span>
+          <span class="ptag">Cubos</span>
+          <span class="ptag">Escarchado</span>
+        </div>
+      </div>
+      <a href="https://wa.me/59170000000?text=Hola!%20Quiero%20hielo%20al%20por%20mayor" target="_blank" class="pcard-btn">
+        <i class="fab fa-whatsapp"></i> Pedir este producto
+      </a>
+    </div>
+
+    <div class="pcard reveal reveal-d2">
+      <div class="pcard-img"
+           style="background:linear-gradient(135deg,#180800,#3d1800);height:215px;display:flex;align-items:center;justify-content:center;position:relative;">
+        <span style="font-size:7rem;line-height:1;">🍷</span>
+        <div class="pcard-overlay"></div>
+        <div class="pcard-badge">🍷 Selecto</div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-emoji">🍷</div>
+        <h3>Vinos</h3>
+        <p>Vinos tintos, blancos y rosados de las mejores bodegas. Perfectos para eventos y celebraciones.</p>
+        <div class="pcard-tags">
+          <span class="ptag">Tinto</span>
+          <span class="ptag">Blanco</span>
+          <span class="ptag">Rosado</span>
+          <span class="ptag">Espumante</span>
+        </div>
+      </div>
+      <a href="https://wa.me/59170000000?text=Hola!%20Quiero%20vinos%20al%20por%20mayor" target="_blank" class="pcard-btn">
+        <i class="fab fa-whatsapp"></i> Pedir este producto
+      </a>
+    </div>
+
+    <div class="pcard reveal reveal-d3">
+      <div class="pcard-img"
+           style="background:linear-gradient(135deg,#001218,#002030);height:215px;display:flex;align-items:center;justify-content:center;position:relative;">
+        <span style="font-size:7rem;line-height:1;">🎉</span>
+        <div class="pcard-overlay"></div>
+        <div class="pcard-badge">🎊 Eventos</div>
+      </div>
+      <div class="pcard-body">
+        <div class="pcard-emoji">🎉</div>
+        <h3>Pack para Eventos</h3>
+        <p>Paquetes completos para bodas, fiestas, eventos corporativos. Todo en un solo pedido mayorista.</p>
+        <div class="pcard-tags">
+          <span class="ptag">Bodas</span>
+          <span class="ptag">Fiestas</span>
+          <span class="ptag">Corporativo</span>
+          <span class="ptag">Personalizado</span>
+        </div>
+      </div>
+      <a href="https://wa.me/59170000000?text=Hola!%20Necesito%20un%20paquete%20para%20evento" target="_blank" class="pcard-btn">
+        <i class="fab fa-whatsapp"></i> Consultar Paquete
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==================== MAYOREO ==================== -->
+<section id="mayoreo">
+  <div class="mayoreo-grid">
+    <div class="mayoreo-text reveal">
+      <div class="sec-tag"><i class="fas fa-truck"></i> Distribución Mayorista</div>
+      <h2>Compra al <em>Por Mayor</em><br />y Ahorra Más</h2>
+      <p>
+        Somos distribuidores mayoristas con más de 10 años de experiencia
+        abasteciendo tiendas, restaurantes, discotecas, licorerías y todo tipo de negocios en Bolivia.
+        Precios competitivos, atención personalizada y entrega garantizada.
+      </p>
+      <ul class="mayoreo-list">
+        <li><i class="fas fa-check-circle"></i> Precios mayoristas muy competitivos</li>
+        <li><i class="fas fa-check-circle"></i> Entrega a domicilio disponible</li>
+        <li><i class="fas fa-check-circle"></i> Pedidos desde 1 caja hasta contenedores</li>
+        <li><i class="fas fa-check-circle"></i> Atención personalizada 7 días a la semana</li>
+        <li><i class="fas fa-check-circle"></i> Productos garantizados y en perfectas condiciones</li>
+        <li><i class="fas fa-check-circle"></i> Factura y comprobante en cada compra</li>
+      </ul>
+      <a href="https://wa.me/59170000000?text=Hola%20Distribuidora%20Do%C3%B1a%20Delia%2C%20quiero%20hacer%20un%20pedido%20al%20por%20mayor.%20%C2%BFCu%C3%A1les%20son%20los%20precios%3F" target="_blank" class="btn-red" style="display:inline-flex;margin-top:4px;">
+        <i class="fab fa-whatsapp"></i> Consultar Precios Mayoristas
+      </a>
+    </div>
+
+    <div class="mayoreo-card reveal reveal-d2">
+      <h3><i class="fas fa-list-check"></i> Disponibilidad de Productos</h3>
+      <table class="cat-table">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Presentación</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><i class="fas fa-beer-mug-empty" style="color:var(--gold)"></i> Cervezas</td>
+            <td>Caja / Unidad</td>
+            <td class="cat-avail">✔ Disponible</td>
+          </tr>
+          <tr>
+            <td><i class="fas fa-wine-bottle" style="color:var(--gold)"></i> Licores</td>
+            <td>Caja / Botella</td>
+            <td class="cat-avail">✔ Disponible</td>
+          </tr>
+          <tr>
+            <td><i class="fas fa-glass-water" style="color:var(--gold)"></i> Sodas</td>
+            <td>Paquete / Unidad</td>
+            <td class="cat-avail">✔ Disponible</td>
+          </tr>
+          <tr>
+            <td><i class="fas fa-snowflake" style="color:var(--gold)"></i> Hielo</td>
+            <td>Bolsa 2kg / 5kg</td>
+            <td class="cat-avail">✔ Disponible</td>
+          </tr>
+          <tr>
+            <td><i class="fas fa-wine-glass" style="color:var(--gold)"></i> Vinos</td>
+            <td>Caja / Botella</td>
+            <td class="cat-avail">✔ Disponible</td>
+          </tr>
+          <tr>
+            <td><i class="fas fa-bolt" style="color:var(--gold)"></i> Energizantes</td>
+            <td>Pack / Unidad</td>
+            <td class="cat-avail">✔ Disponible</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="mayoreo-note">
+        <i class="fas fa-circle-info"></i>
+        Consulta disponibilidad y precios actualizados por WhatsApp o llámanos al <strong>+591 700-00000</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== WHY US ==================== -->
+<section id="nosotros" class="section-pad bg-black">
+  <div class="sec-head reveal">
+    <div class="sec-tag"><i class="fas fa-trophy"></i> ¿Por Qué Elegirnos?</div>
+    <h2>Tu Mejor <em>Opción</em></h2>
+    <p>Años de experiencia distribuyendo calidad, puntualidad y confianza</p>
+    <div class="rule"></div>
+  </div>
+  <div class="feat-grid">
+    <div class="feat-card reveal reveal-d1">
+      <div class="feat-icon"><i class="fas fa-medal"></i></div>
+      <h3>Calidad Garantizada</h3>
+      <p>Todos nuestros productos son originales, con control de calidad y correcta cadena de frío.</p>
+    </div>
+    <div class="feat-card reveal reveal-d2">
+      <div class="feat-icon"><i class="fas fa-truck-fast"></i></div>
+      <h3>Entrega Rápida</h3>
+      <p>Delivery disponible para tu negocio o evento. Coordinamos el envío a tu conveniencia.</p>
+    </div>
+    <div class="feat-card reveal reveal-d3">
+      <div class="feat-icon"><i class="fas fa-tags"></i></div>
+      <h3>Precios Mayoristas</h3>
+      <p>Los mejores precios del mercado para compras al por mayor. Más cantidad, mejor precio.</p>
+    </div>
+    <div class="feat-card reveal reveal-d1">
+      <div class="feat-icon"><i class="fas fa-headset"></i></div>
+      <h3>Atención 7/7</h3>
+      <p>Atendemos todos los días de la semana. Llámanos o escríbenos por WhatsApp, siempre estamos.</p>
+    </div>
+    <div class="feat-card reveal reveal-d2">
+      <div class="feat-icon"><i class="fas fa-boxes-stacked"></i></div>
+      <h3>Amplio Catálogo</h3>
+      <p>Más de 100 productos disponibles: cervezas, licores, sodas, hielo, vinos y bebidas de todo tipo.</p>
+    </div>
+    <div class="feat-card reveal reveal-d3">
+      <div class="feat-icon"><i class="fas fa-handshake"></i></div>
+      <h3>Experiencia & Confianza</h3>
+      <p>Más de 10 años en el mercado distribuyendo a los mejores negocios y eventos de Bolivia.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CONTACT ==================== -->
+<section id="contacto">
+  <div class="sec-head reveal">
+    <div class="sec-tag"><i class="fas fa-comments"></i> Contáctanos</div>
+    <h2>Haz tu <em>Pedido</em> Hoy</h2>
+    <p>Escríbenos, llámanos o déjanos un mensaje. Te respondemos de inmediato.</p>
+    <div class="rule"></div>
+  </div>
+
+  <div class="contact-wrap">
+    <div class="contact-left reveal">
+      <h2>¿Listo para tu<br /><em>próximo pedido</em>?</h2>
+      <p>
+        Contáctanos por WhatsApp, llámanos directamente o usa el formulario.
+        Estamos disponibles todos los días para atender tu pedido mayorista.
+      </p>
+      <div class="cinfo-list">
+        <div class="cinfo-item">
+          <div class="cinfo-icon"><i class="fas fa-phone-flip"></i></div>
+          <div class="cinfo-text">
+            <strong>Teléfono / Celular</strong>
+            <a href="tel:+59170000000">+591 700-00000</a>
+          </div>
+        </div>
+        <div class="cinfo-item">
+          <div class="cinfo-icon"><i class="fab fa-whatsapp"></i></div>
+          <div class="cinfo-text">
+            <strong>WhatsApp</strong>
+            <a href="https://wa.me/59170000000" target="_blank">+591 700-00000 — Escríbenos aquí</a>
+          </div>
+        </div>
+        <div class="cinfo-item">
+          <div class="cinfo-icon"><i class="fas fa-clock"></i></div>
+          <div class="cinfo-text">
+            <strong>Horario de Atención</strong>
+            <span>Lunes a Domingo: 8:00 AM – 11:00 PM</span>
+          </div>
+        </div>
+        <div class="cinfo-item">
+          <div class="cinfo-icon"><i class="fas fa-location-dot"></i></div>
+          <div class="cinfo-text">
+            <strong>Ubicación</strong>
+            <span>Bolivia — Pedidos y Delivery disponibles</span>
+          </div>
+        </div>
+      </div>
+      <a href="https://wa.me/59170000000?text=Hola%20Distribuidora%20Do%C3%B1a%20Delia!%20Quiero%20hacer%20un%20pedido." target="_blank" class="wa-cta">
+        <i class="fab fa-whatsapp"></i> Escribir por WhatsApp
+      </a>
+    </div>
+
+    <div class="form-box reveal reveal-d2">
+      <h3>Envíanos un Mensaje</h3>
+      <p>Te responderemos a la brevedad por WhatsApp o teléfono.</p>
+      <div id="contact-form-inner">
+        <div class="fg-row">
+          <div class="fg">
+            <label for="cf-name">Nombre Completo</label>
+            <input type="text" id="cf-name" placeholder="Tu nombre" />
+          </div>
+          <div class="fg">
+            <label for="cf-phone">WhatsApp / Teléfono</label>
+            <input type="tel" id="cf-phone" placeholder="+591 xxxxxxx" />
+          </div>
+        </div>
+        <div class="fg">
+          <label for="cf-tipo">Tipo de Pedido</label>
+          <select id="cf-tipo">
+            <option value="">Selecciona una categoría…</option>
+            <option>🍺 Cervezas al por mayor</option>
+            <option>🥃 Licores y Spirits</option>
+            <option>🥤 Sodas y Bebidas</option>
+            <option>❄️ Hielo</option>
+            <option>🍷 Vinos</option>
+            <option>🎉 Pack para Evento</option>
+            <option>📦 Pedido mixto / varios</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label for="cf-msg">Detalle de tu Pedido / Consulta</label>
+          <textarea id="cf-msg" placeholder="Cuéntanos qué necesitas, cantidad aproximada, lugar de entrega…"></textarea>
+        </div>
+        <button class="form-submit" onclick="enviarWA()">
+          <i class="fab fa-whatsapp"></i> Enviar por WhatsApp
+        </button>
+      </div>
+      <div class="form-success" id="form-ok">
+        <span class="fs-icon"><i class="fab fa-whatsapp"></i></span>
+        <h4>¡Pedido enviado!</h4>
+        <p>Tu consulta fue redirigida a nuestro WhatsApp. Te responderemos a la brevedad posible. ¡Gracias por elegirnos!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <img class="fb-logo" src="logo.png" alt="Logo"
+           onerror="this.style.display='none'" />
+      <p class="fb-desc">Tu distribuidora mayorista de confianza en Bolivia. Cervezas, licores, sodas, hielo y todo tipo de bebidas para tu negocio o evento.</p>
+      <div class="fb-socials">
+        <a href="https://wa.me/59170000000" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="tel:+59170000000" title="Llamar"><i class="fas fa-phone-flip"></i></a>
+      </div>
+    </div>
+    <div class="fc">
+      <h4>Productos</h4>
+      <ul>
+        <li><a href="#productos"><i class="fas fa-chevron-right" style="font-size:.65rem;color:var(--red)"></i> Cervezas</a></li>
+        <li><a href="#productos"><i class="fas fa-chevron-right" style="font-size:.65rem;color:var(--red)"></i> Licores & Spirits</a></li>
+        <li><a href="#productos"><i class="fas fa-chevron-right" style="font-size:.65rem;color:var(--red)"></i> Sodas & Bebidas</a></li>
+        <li><a href="#productos"><i class="fas fa-chevron-right" style="font-size:.65rem;color:var(--red)"></i> Hielo</a></li>
+        <li><a href="#productos"><i class="fas fa-chevron-right" style="font-size:.65rem;color:var(--red)"></i> Vinos</a></li>
+        <li><a href="#productos"><i class="fas fa-chevron-right" style="font-size:.65rem;color:var(--red)"></i> Pack Eventos</a></li>
+      </ul>
+    </div>
+    <div class="fc">
+      <h4>Contacto Rápido</h4>
+      <ul>
+        <li><a href="tel:+59170000000"><i class="fas fa-phone-flip" style="color:var(--gold)"></i> +591 700-00000</a></li>
+        <li><a href="https://wa.me/59170000000" target="_blank"><i class="fab fa-whatsapp" style="color:var(--green-wa)"></i> WhatsApp</a></li>
+        <li><a href="#contacto"><i class="fas fa-envelope" style="color:var(--red)"></i> Formulario</a></li>
+        <li><a href="#mayoreo"><i class="fas fa-truck" style="color:var(--gold)"></i> Info Mayoreo</a></li>
+        <li><a href="#nosotros"><i class="fas fa-star" style="color:var(--gold)"></i> Nosotros</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Distribuidora Doña Delia · Bolivia · Todos los derechos reservados.</p>
+    <div class="age-chip"><i class="fas fa-shield-halved"></i> Solo mayores de 18 años</div>
+  </div>
+</footer>
+
+<!-- ==================== WA CHAT BUBBLE ==================== -->
+<div id="wa-bubble">
+  <div class="wa-chat-box" id="wa-box">
+    <div class="wcb-header">
+      <div class="wcb-avatar">
+        <img src="logo.png" alt="Doña Delia"
+             onerror="this.parentElement.innerHTML='🍺'" />
+      </div>
+      <div class="wcb-info">
+        <strong>Distribuidora Doña Delia</strong>
+        <span>🟢 En línea ahora</span>
+      </div>
+      <i class="fas fa-times wcb-close" onclick="toggleWA()"></i>
+    </div>
+    <div class="wcb-msg">
+      👋 ¡Hola! Soy de <strong>Doña Delia</strong>.<br /><br />
+      ¿Qué producto necesitas hoy? Atendemos pedidos al por mayor de cervezas, licores, sodas, hielo y mucho más.<br /><br />
+      ¡Escríbenos y te respondemos de inmediato! 🍺🥃❄️
+    </div>
+    <button class="wcb-start" onclick="abrirWA()">
+      <i class="fab fa-whatsapp"></i> Iniciar conversación
+    </button>
+  </div>
+  <button class="wa-fab" id="wa-fab" onclick="toggleWA()" style="position:relative;">
+    <i class="fab fa-whatsapp"></i>
+    <span class="wa-notif" id="wa-notif">1</span>
+  </button>
+</div>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script>
+  /* === AGE GATE === */
+  const gate = document.getElementById('age-gate');
+  if (sessionStorage.getItem('age-ok') === '1') gate.style.display = 'none';
+  document.getElementById('age-yes').addEventListener('click', () => {
+    sessionStorage.setItem('age-ok', '1');
+    gate.style.transition = 'opacity .5s';
+    gate.style.opacity = '0';
+    setTimeout(() => gate.style.display = 'none', 500);
+  });
+  document.getElementById('age-no').addEventListener('click', () => {
+    window.location.href = 'https://www.google.com';
+  });
+
+  /* === NAVBAR SCROLL === */
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', scrollY > 50);
+  });
+
+  /* === MOBILE NAV === */
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobile-nav').classList.add('open');
+  });
+  document.getElementById('mnav-close').addEventListener('click', closeMobileNav);
+  function closeMobileNav() {
+    document.getElementById('mobile-nav').classList.remove('open');
+  }
+
+  /* === SCROLL REVEAL === */
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+  /* === WHATSAPP CHAT BUBBLE === */
+  let waOpen = false;
+  setTimeout(() => {
+    document.getElementById('wa-box').classList.add('open');
+    waOpen = true;
+  }, 3500);
+
+  function toggleWA() {
+    waOpen = !waOpen;
+    const box = document.getElementById('wa-box');
+    const notif = document.getElementById('wa-notif');
+    if (waOpen) {
+      box.classList.add('open');
+      notif.style.display = 'none';
+    } else {
+      box.classList.remove('open');
+    }
+  }
+  function abrirWA() {
+    window.open('https://wa.me/59170000000?text=Hola%20Distribuidora%20Do%C3%B1a%20Delia!%20Quiero%20hacer%20un%20pedido.', '_blank');
+  }
+
+  /* === FORM WA === */
+  function enviarWA() {
+    const name  = document.getElementById('cf-name').value.trim();
+    const phone = document.getElementById('cf-phone').value.trim();
+    const tipo  = document.getElementById('cf-tipo').value;
+    const msg   = document.getElementById('cf-msg').value.trim();
+    if (!name)  { alert('Por favor ingresa tu nombre.'); return; }
+    if (!phone) { alert('Por favor ingresa tu número de WhatsApp.'); return; }
+    const text =
+      `*Distribuidora Doña Delia – Nuevo Pedido*\n\n` +
+      `*Nombre:* ${name}\n` +
+      `*Teléfono:* ${phone}\n` +
+      `*Categoría:* ${tipo || 'No especificado'}\n` +
+      `*Detalle:* ${msg || 'Sin detalle adicional'}\n\n` +
+      `_Mensaje enviado desde la web._`;
+    window.open(`https://wa.me/59170000000?text=${encodeURIComponent(text)}`, '_blank');
+    document.getElementById('contact-form-inner').style.display = 'none';
+    document.getElementById('form-ok').style.display = 'block';
+  }
+
+  /* === COUNTER ANIMATION === */
+  function animCounter(el, target, suffix = '') {
+    let cur = 0;
+    const step = Math.ceil(target / 60);
+    const timer = setInterval(() => {
+      cur = Math.min(cur + step, target);
+      el.textContent = (suffix === '+' ? '+' : '') + cur + (suffix === '+' ? '' : suffix);
+      if (cur >= target) clearInterval(timer);
+    }, 25);
+  }
+  const statObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const nums = e.target.querySelectorAll('.stat-n');
+      nums.forEach(n => {
+        const raw = n.textContent;
+        if (raw.includes('+')) animCounter(n, parseInt(raw), '+');
+        else if (raw.includes('h')) { n.textContent = '24h'; }
+      });
+      statObs.unobserve(e.target);
+    });
+  }, { threshold: .5 });
+  const heroStats = document.querySelector('.hero-stats');
+  if (heroStats) statObs.observe(heroStats);
+</script>
+</body>
+</html>
